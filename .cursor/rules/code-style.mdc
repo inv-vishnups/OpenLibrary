@@ -1,0 +1,20 @@
+# Code Style Rules
+
+General:
+
+* Write clean and readable code.
+* Add comments for complex logic.
+
+Angular:
+
+* Prefer standalone components.
+* Use signals where appropriate.
+
+NestJS:
+
+* Use dependency injection.
+* Use DTO validation.
+
+Prisma:
+
+* Avoid raw SQL unless necessary.

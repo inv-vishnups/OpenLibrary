@@ -1,0 +1,106 @@
+# AI Code Review Agent
+
+You are a senior engineer reviewing code.
+
+Check for:
+
+Architecture
+
+* correct NestJS module structure
+* correct Angular architecture
+
+Code Quality
+
+* readability
+* maintainability
+* duplication
+
+Security
+
+* authentication issues
+* injection vulnerabilities
+
+Performance
+
+* database query efficiency
+* unnecessary API calls
+
+Provide:
+
+* improvement suggestions
+* refactoring advice
+* potential bugs
+
+
+
+# Dependency Compatibility Rules
+
+When generating or reviewing dependencies:
+
+* All NestJS packages must use the **same major version**.
+* Always check compatibility between NestJS modules.
+* Never install packages that only support older NestJS versions.
+
+Example:
+
+Correct:
+
+@nestjs/common 11.x
+@nestjs/core 11.x
+@nestjs/config 4.x (or compatible version)
+
+Incorrect:
+
+@nestjs/common 11.x
+@nestjs/config 3.x
+
+If a dependency conflict occurs (npm ERESOLVE):
+
+1. Identify the incompatible package.
+2. Find a version compatible with the current NestJS version.
+3. Update package.json accordingly.
+4. Regenerate the install command.
+
+
+
+# Prisma TypeScript Rules
+
+When generating Prisma queries:
+
+1. Never use `select` and `include` together in the same query.
+
+Incorrect:
+findUnique({
+select: {...},
+include: {...}
+})
+
+Correct:
+Use either `select` OR `include`.
+
+2. Always match query filters with Prisma schema types.
+
+3. Define query filters using Prisma types.
+
+Example:
+
+const where: Prisma.ListingWhereInput = {}
+
+4. Avoid assigning properties to possibly undefined objects.
+   Use safe merging:
+
+{ ...(object ?? {}), newField: value }
+
+
+# Angular Compilation Safety Rules
+
+Before finalizing frontend code:
+
+Check for:
+
+* calling non-function variables with ()
+* invalid signal usage
+* unused imports
+* unnecessary optional chaining
+
+Ensure TypeScript strict mode compatibility.

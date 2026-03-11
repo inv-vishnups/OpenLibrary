@@ -1,0 +1,139 @@
+# OpenLibrary Project Rules
+
+## Project Overview
+
+OpenLibrary is a web application where users can list, sell, or share books they already own.
+
+## Technology Stack
+
+Frontend:
+
+* Angular 20
+* TailwindCSS
+
+Backend:
+
+* NestJS 11
+* Prisma ORM
+
+Database:
+
+* MySQL
+
+Infrastructure:
+
+* Docker
+* Docker Compose
+
+Authentication:
+
+* JWT
+
+## Architecture Rules
+
+* Follow modular architecture.
+* Separate frontend and backend projects.
+* Backend must follow NestJS module structure.
+* Database must use Prisma ORM.
+* All APIs must follow REST standards.
+
+## Coding Standards
+
+### Frontend
+
+* Use Angular standalone components.
+* Use TailwindCSS for styling.
+* Organize code by feature modules.
+* Use RxJS best practices.
+
+### Backend
+
+* Use DTO validation with class-validator.
+* Use services for business logic.
+* Controllers should only handle HTTP logic.
+* Use Prisma for all database access.
+
+### Database
+
+* Use normalized relational schema.
+* Use indexes for frequently queried fields.
+* Avoid unnecessary joins.
+
+### DevOps
+
+* Use Docker for all services.
+* Use multi-stage builds.
+* Ensure development and production environments.
+
+## Features
+
+The application supports:
+
+* User authentication
+* Book listings
+* Book search
+* Buy/sell transactions
+* Reviews
+* Messaging between users
+
+## Folder Structure
+
+openLibrary/
+frontend/
+backend/
+database/
+docker/
+agents/
+
+
+# Dependency Rules
+
+All NestJS packages must use the same major version.
+
+For NestJS 11:
+
+@nestjs/common 11.x
+@nestjs/core 11.x
+@nestjs/platform-express 11.x
+@nestjs/config 4.x or later
+
+Never mix NestJS 11 with packages built for NestJS 10 or lower.
+
+
+# Database Connection Rules
+
+The application uses MySQL as the primary database.
+
+Database connections must use environment variables stored in a `.env` file.
+
+Never hardcode credentials in source code.
+
+Use the following format:
+
+DATABASE_URL="mysql://USERNAME:PASSWORD@HOST:PORT/DATABASE"
+
+Example:
+
+DATABASE_URL="mysql://root:password@localhost:3306/openlibrary"
+
+Prisma must read the connection from:
+
+env("DATABASE_URL")
+
+
+
+# Angular Dependency Rules
+
+When generating Angular projects:
+
+Angular 20 must use compatible dependencies.
+
+Required versions:
+
+typescript >=5.8 <6.0
+@angular/* 20.x
+@angular-devkit/build-angular 20.x
+
+Never install TypeScript versions lower than 5.8 when using Angular 20.
+
+Always verify dependency compatibility before generating package.json.
