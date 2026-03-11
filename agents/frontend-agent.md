@@ -61,3 +61,15 @@ Correct:
 images.length (if not nullable)
 
 4. Remove unused Angular imports.
+
+# Angular Build Rules
+
+Angular applications must be compatible with Docker builds.
+
+Avoid dependencies that require internet access during build.
+
+Google Fonts must either:
+
+* be hosted locally
+  OR
+* have font inlining disabled in angular.json.

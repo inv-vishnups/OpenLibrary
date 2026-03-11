@@ -4,21 +4,21 @@
 
 Represents a registered user of the platform.
 
-Fields:
+### Fields
 
-id (int, primary key)
-name (string)
-email (string, unique)
-password (string)
-avatarUrl (string, optional)
-createdAt (datetime)
-updatedAt (datetime)
+* **id** (int, primary key, auto-increment)
+* **name** (string)
+* **email** (string, unique)
+* **password** (string)
+* **avatarUrl** (string, optional)
+* **createdAt** (datetime)
+* **updatedAt** (datetime)
 
-Relationships:
+### Relationships
 
-User can own many books
-User can create many listings
-User can write many reviews
+* A **User** can own many **Books**
+* A **User** can create many **Listings**
+* A **User** can write many **Reviews**
 
 ---
 
@@ -26,20 +26,20 @@ User can write many reviews
 
 Represents a physical book owned by a user.
 
-Fields:
+### Fields
 
-id (int, primary key)
-title (string)
-author (string)
-isbn (string, optional)
-description (text)
-ownerId (foreign key → User.id)
-createdAt (datetime)
+* **id** (int, primary key, auto-increment)
+* **title** (string)
+* **author** (string)
+* **isbn** (string, optional)
+* **description** (text)
+* **ownerId** (foreign key → `User.id`)
+* **createdAt** (datetime)
 
-Relationships:
+### Relationships
 
-Book belongs to User
-Book can have multiple listings
+* A **Book** belongs to a **User**
+* A **Book** can have multiple **Listings**
 
 ---
 
@@ -47,18 +47,18 @@ Book can have multiple listings
 
 Represents a book being sold.
 
-Fields:
+### Fields
 
-id (int, primary key)
-bookId (foreign key → Book.id)
-price (decimal)
-condition (string)
-status (available | sold | reserved)
-createdAt (datetime)
+* **id** (int, primary key, auto-increment)
+* **bookId** (foreign key → `Book.id`)
+* **price** (decimal)
+* **condition** (string)
+* **status** (enum: `available | sold | reserved`)
+* **createdAt** (datetime)
 
-Relationships:
+### Relationships
 
-Listing belongs to Book
+* A **Listing** belongs to a **Book**
 
 ---
 
@@ -66,13 +66,18 @@ Listing belongs to Book
 
 Represents a purchase of a book.
 
-Fields:
+### Fields
 
-id (int, primary key)
-listingId (foreign key)
-buyerId (foreign key → User.id)
-status (pending | completed | cancelled)
-createdAt (datetime)
+* **id** (int, primary key, auto-increment)
+* **listingId** (foreign key → `Listing.id`)
+* **buyerId** (foreign key → `User.id`)
+* **status** (enum: `pending | completed | cancelled`)
+* **createdAt** (datetime)
+
+### Relationships
+
+* A **Transaction** belongs to a **Listing**
+* A **Transaction** references the **User** who made the purchase
 
 ---
 
@@ -80,11 +85,16 @@ createdAt (datetime)
 
 Represents feedback for a seller.
 
-Fields:
+### Fields
 
-id (int, primary key)
-reviewerId (foreign key → User.id)
-targetUserId (foreign key → User.id)
-rating (1–5)
-comment (text)
-createdAt (datetime)
+* **id** (int, primary key, auto-increment)
+* **reviewerId** (foreign key → `User.id`)
+* **targetUserId** (foreign key → `User.id`)
+* **rating** (integer, range 1–5)
+* **comment** (text)
+* **createdAt** (datetime)
+
+### Relationships
+
+* A **Review** is written by a **User** (`reviewerId`)
+* A **Review** targets another **User** (`targetUserId`)
